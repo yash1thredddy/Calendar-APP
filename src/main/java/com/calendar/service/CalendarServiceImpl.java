@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // Main service for calendar operations - validates events and coordinates storage
 public class CalendarServiceImpl {
@@ -47,15 +48,11 @@ public class CalendarServiceImpl {
         return storage.findByDate(now.toLocalDate()).stream()
             .filter(event -> event.getEndTime().isAfter(now))
             .sorted()
-            .toList();
+            .collect(Collectors.toList());
     }
 
     public List<Event> listEventsForDate(LocalDateTime date) {
         return storage.findByDate(date.toLocalDate());
-    }
-
-    public Optional<TimeSlot> findNextAvailableSlot(int durationInMinutes) {
-        return findNextAvailableSlot(durationInMinutes, LocalDateTime.now());
     }
 
     public Optional<TimeSlot> findNextAvailableSlot(int durationInMinutes, LocalDateTime date) {

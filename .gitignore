@@ -31,7 +31,6 @@ buildNumber.properties
 *.iws
 *.iml
 *.ipr
-out/
 
 # Eclipse
 .classpath
@@ -59,8 +58,5 @@ Desktop.ini
 # Build files
 build/
 dist/
-.claude
 
-# Internal tracking files (not for submission)
-REQUIREMENTS_CHECKLIST.md
-PPT.md
+
