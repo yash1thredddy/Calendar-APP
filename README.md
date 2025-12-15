@@ -12,6 +12,48 @@ This application helps you manage your daily schedule by:
 - Booking available slots directly
 - Deleting events you no longer need
 
+## Features
+
+### Basic Features
+- Create events with title, start time, and end time
+- Automatic overlap detection and prevention
+- View all events for today
+- View remaining events (upcoming only)
+- View events for any specific date
+- List all events across all dates
+- Delete events
+
+### Nice-to-Have Features
+- **Smart slot finding**: Shows all available time slots, not just one
+- **Direct booking**: Book slots directly from search results
+- **Quick actions**: Chain operations without going back to menu
+- **Input validation**: Helpful error messages with retry (no crashes)
+- **Event summaries**: See your day's schedule after creating events
+
+## Project Structure
+
+```
+src/
+├── main/java/com/calendar/
+│   ├── CalendarApp.java              # Main application
+│   ├── model/                         # Data models
+│   │   ├── Event.java
+│   │   └── TimeSlot.java
+│   ├── service/                       # Core logic
+│   │   ├── CalendarServiceImpl.java
+│   │   ├── EventStorage.java
+│   │   ├── InMemoryEventStorage.java
+│   │   ├── SlotFinder.java
+│   │   └── StandardSlotFinder.java
+│   ├── factory/
+│   │   └── ServiceFactory.java
+│   └── exception/                     # Custom exceptions
+│       ├── EventOverlapException.java
+│       ├── InvalidEventException.java
+│       └── StorageException.java
+└── test/java/com/calendar/           # Test files
+```
+
 ## Approach and Design
 
 ### Overview
@@ -190,48 +232,6 @@ Total Events: 0
 5. View your schedule and delete an event
 
 Since events are stored in memory, they're lost when you exit the app.
-
-## Project Structure
-
-```
-src/
-├── main/java/com/calendar/
-│   ├── CalendarApp.java              # Main application
-│   ├── model/                         # Data models
-│   │   ├── Event.java
-│   │   └── TimeSlot.java
-│   ├── service/                       # Core logic
-│   │   ├── CalendarServiceImpl.java
-│   │   ├── EventStorage.java
-│   │   ├── InMemoryEventStorage.java
-│   │   ├── SlotFinder.java
-│   │   └── StandardSlotFinder.java
-│   ├── factory/
-│   │   └── ServiceFactory.java
-│   └── exception/                     # Custom exceptions
-│       ├── EventOverlapException.java
-│       ├── InvalidEventException.java
-│       └── StorageException.java
-└── test/java/com/calendar/           # Test files
-```
-
-## Features
-
-### Basic Features
-- Create events with title, start time, and end time
-- Automatic overlap detection and prevention
-- View all events for today
-- View remaining events (upcoming only)
-- View events for any specific date
-- List all events across all dates
-- Delete events
-
-### Nice-to-Have Features
-- **Smart slot finding**: Shows all available time slots, not just one
-- **Direct booking**: Book slots directly from search results
-- **Quick actions**: Chain operations without going back to menu
-- **Input validation**: Helpful error messages with retry (no crashes)
-- **Event summaries**: See your day's schedule after creating events
 
 ## Running Tests
 
