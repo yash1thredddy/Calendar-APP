@@ -127,8 +127,8 @@ public class CalendarApp {
         LocalDateTime startTime = promptForDateTime("Start Time (MM-dd-yyyy HH:mm): ");
         LocalDateTime endTime = promptForDateTime("End Time   (MM-dd-yyyy HH:mm): ");
 
-        // Check if event is in the past
-        if (startTime.isBefore(LocalDateTime.now())) {
+        // Check if event is in the past and re-validate until valid future time or user cancels
+        while (startTime.isBefore(LocalDateTime.now())) {
             System.out.println("\nWarning: This event is in the past!");
             System.out.print("Do you want to enter a new future time? (y/n): ");
             String choice = scanner.nextLine().trim().toLowerCase();
@@ -137,8 +137,11 @@ public class CalendarApp {
                 System.out.println("\nPlease enter future times:");
                 startTime = promptForDateTime("Start Time (MM-dd-yyyy HH:mm): ");
                 endTime = promptForDateTime("End Time   (MM-dd-yyyy HH:mm): ");
+                // Loop continues to re-validate the new times
+            } else {
+                // User chose 'n' or anything else - keep the past time
+                break;
             }
-            // If 'n' or anything else, keep the past time
         }
 
         Event event = Event.create(title, startTime, endTime);
@@ -299,6 +302,28 @@ public class CalendarApp {
         System.out.print("End Time (HH:mm): ");
         String endTimeStr = scanner.nextLine().trim();
         LocalDateTime endTime = date.atTime(parseTime(endTimeStr));
+
+        // Check if event is in the past and re-validate until valid future time or user cancels
+        while (startTime.isBefore(LocalDateTime.now())) {
+            System.out.println("\nWarning: This event is in the past!");
+            System.out.print("Do you want to enter a new future time? (y/n): ");
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            if (choice.equals("y")) {
+                System.out.println("\nPlease enter future times:");
+                System.out.print("Start Time (HH:mm): ");
+                startTimeStr = scanner.nextLine().trim();
+                startTime = date.atTime(parseTime(startTimeStr));
+
+                System.out.print("End Time (HH:mm): ");
+                endTimeStr = scanner.nextLine().trim();
+                endTime = date.atTime(parseTime(endTimeStr));
+                // Loop continues to re-validate the new times
+            } else {
+                // User chose 'n' or anything else - keep the past time
+                break;
+            }
+        }
 
         Event event = Event.create(title, startTime, endTime);
         calendarService.addEvent(event);
