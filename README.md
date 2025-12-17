@@ -49,8 +49,7 @@ src/
 │   │   └── ServiceFactory.java
 │   └── exception/                     # Custom exceptions
 │       ├── EventOverlapException.java
-│       ├── InvalidEventException.java
-│       └── StorageException.java
+│       └── InvalidEventException.java
 └── test/java/com/calendar/           # Test files
 ```
 
