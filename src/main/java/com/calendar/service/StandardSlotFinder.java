@@ -14,8 +14,8 @@ public class StandardSlotFinder implements SlotFinder {
     private final EventStorage storage;
 
     // Working hours: 9 AM to 6 PM
-    private static final int DEFAULT_START_HOUR = 9;
-    private static final int DEFAULT_END_HOUR = 18;
+    private static final int DEFAULT_START_HOUR = 9; // 9 Am
+    private static final int DEFAULT_END_HOUR = 18; // 6 Pm
 
     public StandardSlotFinder(EventStorage storage) {
         if (storage == null) {
